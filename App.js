@@ -15,6 +15,7 @@ export default class App extends Component  {
   }
   
   onIconPress = (row, column)=>{
+    if(this.state.won == 0){
     var a = this.state.game.slice();
     if( a[row][column] == 0 ){
       a[row][column] = this.state.player
@@ -39,7 +40,14 @@ export default class App extends Component  {
     sum = 0
     sum = a[0][2]+a[1][1]+a[2][0]
     this.win(sum)
-    
+    }
+    else{
+      if(this.state.won == 1){
+        Alert.alert("player 1 win")
+      }else if(this.state.won == -1){
+        Alert.alert("player 2 win")
+      }
+    }
   }
 
   rest=()=>{
@@ -56,10 +64,10 @@ export default class App extends Component  {
 
   win = (sum)=>{
     if(sum == 3){
-      this.setState({won:player})
+      this.setState({won:this.state.player})
       Alert.alert("player 1 win")
     }else if(sum == -3){
-      this.setState({won:player})
+      this.setState({won:this.state.player})
       Alert.alert("player 2 win")
     }
   }
